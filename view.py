@@ -1,24 +1,11 @@
-import streamlit as st
+from models.item import Item, ItemDAO
 
-dao = ItemDAO()
-controller = ItemController(dao)
+class View:
+    @staticmethod
+    def item_listar():
+        return ItemDAO.listar()
 
-st.title("Cadastro de Itens")
-
-with st.form("form_item"):
-    descricao = st.text_input("Descrição")
-    quantidade = st.number_input("Quantidade", min_value=1, step=1)
-    submit = st.form_submit_button("Adicionar")
-
-if submit:
-    if descricao.strip() == "":
-        st.error("Descrição não pode ser vazia")
-    else:
-        controller.criarItem(descricao, quantidade)
-        st.success("Item adicionado com sucesso!")
-
-st.subheader("Lista de Itens")
-
-itens = controller.obterTodosOsItens()
-for item in itens:
-    st.write(f"ID: {item.id} | Descrição: {item.descricao} | Quantidade: {item.quantidade}")
+    @staticmethod
+    def item_inserir(nome, email, fone):
+        cliente = Item(0, nome, email, fone)
+        ItemDAO.inserir(cliente)

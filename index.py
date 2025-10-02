@@ -1,8 +1,9 @@
 import streamlit as st
-from templates.controller import ItemController
+from view.item_view import ItemView
 
-class IndexUI:
-    def main():
-        ItemController.main()
+def main():
+    view = ItemView()
+    view.render()
 
-IndexUI.main()
+if __name__ == "__main__":
+    main()
